@@ -1,0 +1,64 @@
+---
+title: "Class 04"
+author: "Ethan Vukovic"
+date: "2026-09-02"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: true
+---
+
+```
+{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+job = list(
+  title   = "Research Data Scientist, Magic Eye",
+  company = "Google",
+  salary  = list(min = 147000, max = 210000)
+)
+str(job)
+
+List of 3
+ $ title  : chr "Research Data Scientist, Magic Eye"
+ $ company: chr "Google"
+ $ salary :List of 2
+  ..$ min: num 147000
+  ..$ max: num 210000
+
+# 1. The company name
+# 2. The max salary
+# 3. The maximum salary again, using only []
+# 4. The names of the elements in the job
+
+company = job$company
+max_salary = job$salary$max
+max_salary_alt = job[[3]][[2]]
+names(job)
+
+```
+{r subset_vec}
+crashes_by_day = c(2020, 2241, 2327, 2285, 2380, 1866, 1664)
+names(crashes_by_day) = c("Mon", "Tue", "Wed", "Thu",
+                          "Fri", "Sat", "Sun")
+crashes_by_day[2]    # one position
+
+crashes_by_day[c("Wed","Fri")]
+crashes_by_day[c(3,5)]
+crashes_by_day[1:5] # Only works for elements in a row
+crashes_by_day[]# returns all the elements --> no diff than crashes_by_day
+```
+
+# Importing data in R
+
+## CSV
+
+install.packages("tidyverse")
+```
+{r csvs}
+oh_jobs_baser = read.csv
+
+```

@@ -1,0 +1,31 @@
+---
+title: "Assignment 04"
+author: "Ethan Vukovic"
+date: "2026-09-13"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## data from Assignment 04
+
+```{r readdata}
+con = DBI::dbConnect(RSQLite::SQLite(), "data/midwest_airbnb (4).db")
+listings = DBI::dbReadTable(con, "listings")
+
+sum(listings$city == "Columbus")
+
+unique(listings$neighbourhood[listings$city == "Chicago"])
+
+sum(listings$host_is_superhost == "t", na.rm = TRUE)
+
+sum(listings$price > 1000)
+```
