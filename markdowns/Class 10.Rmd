@@ -1,0 +1,33 @@
+---
+title: "Class 10"
+author: "Ethan Vukovic"
+date: "2026-09-28"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Robotstxt
+
+The code chunk below will show the output from the [robotstxt package] () for the ISA course bulletin available at:
+
+```{r robotstxt}
+
+robotstxt::paths_allowed(paths = "/courses-instruction/isa/", domain = "bulletin.miamioh.edu", bot = "*")
+
+robotstxt::paths_allowed(paths = "/wiki/Miami_RedHawks_football", domain = "en.wikipedia.org", bot = "*")
+
+robotstxt::paths_allowed(paths = "/jobs/", domain = "www.linkedin.com", bot = "*")
+
+robotstxt::paths_allowed(paths = "/jobs and /viewjob", domain = "www.indeed.com", bot = "*")
+e
+```
+

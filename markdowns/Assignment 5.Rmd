@@ -1,0 +1,39 @@
+---
+title: "Assignment 05"
+author: "Ethan Vukovic"
+date: "2026-09-26"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(DBI)
+library(RSQLite)
+
+con <- dbConnect(
+  RSQLite::SQLite(),
+  "data/midwest_airbnb.db"
+)
+dbListTables(con)
+
+listings = dbReadTable(con, "listings")
+View(listings)
+
+con = DBI::dbConnect(
+  RSQLite::SQLite(),
+  "data/midwest_airbnb.db"
+)
+
+```
+

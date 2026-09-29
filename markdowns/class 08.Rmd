@@ -1,0 +1,92 @@
+---
+title: "08 class"
+author: "Ethan Vukovic"
+date: "2026-09-21"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Illustrating the 'httr' functions
+
+```{r}
+
+install.packages("httr2")
+
+
+httr2::request("https://data.cincinnati-oh.gov/resource/rvmt-pkmq.json") |>
+  httr2::req_url_query("$limit" = 5) |>
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  jsonlite::fromJSON()
+```
+
+## Fred Example
+```{r fred}
+ohio_jobs = httr2::request("https://api.stlouisfed.org/fred/series/observations") |>
+  httr2::req_url_query(
+    series_id = "IHLIDXUSOH",
+    api_key = Sys.getenv("FRED_API_KEY"),
+    file_type = "json"
+  ) |>
+  # nothing has been sent yet
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  jsonlite::fromJSON()
+```
+
+## USA Jobs
+
+```{r usajobs}
+
+httr2::request("https://data.usajobs.gov/api/search") |>
+  httr2::req_url_query(Keyword = "Data Analyst", ResultsPerPage = 500) |>
+  httr2::req_headers(
+    Host = "data.usajobs.gov",
+    "User-Agent" = "vukovie@miamioh.edu",
+    "Authorization-Key" = Sys.getenv("USAJOBS_API_KEY")
+  ) |>
+  httr2::req_perform() |>
+  httr2::resp_body_string() |>
+  jsonlite::fromJSON(flatten = TRUE)
+
+
+jobs_small = usajobs_df |>
+  dplyr::select(
+    title = MatchedObjectDescriptor.PositionTitle,
+    department = MatchedObjectDescriptor.DepartmentName,
+    agency = MatchedObjectDescriptor.OrganizationName,
+    location = MatchedObjectDescriptor.PositionLocationDisplay,
+    closes = MatchedObjectDescriptor.ApplicationCloseDate
+  )
+
+## Easy way -- since we looked for data analyst as a key word
+nrow(jobs_small)
+# q2
+table(jobs_small$department) |> sort(decreasing = T)
+jobs_small |> dplyr::count(department) |> dplyr::arrange(dplyr::desc(n))
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
