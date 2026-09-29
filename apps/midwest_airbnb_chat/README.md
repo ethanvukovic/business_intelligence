@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio website: https://ethanvukovic.github.io/portfolio-2/
+Personal portfolio website: <https://ethanvukovic.github.io/portfolio-2/>
 
 ## What I changed
 
